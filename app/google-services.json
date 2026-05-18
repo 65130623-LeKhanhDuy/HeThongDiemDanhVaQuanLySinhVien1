@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "981654370063",
+    "project_id": "hethongdiemdanhsv",
+    "storage_bucket": "hethongdiemdanhsv.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981654370063:android:fe87511a406127d884307a",
+        "android_client_info": {
+          "package_name": "com.example.hethongdiemdanhvaquanlysinhvien1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHNM4Kvznv7QWr1jgtE1mJXb1P2ZgVMLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

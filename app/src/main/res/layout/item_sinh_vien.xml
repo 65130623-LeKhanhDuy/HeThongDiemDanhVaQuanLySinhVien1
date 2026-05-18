@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:gravity="center_vertical"
+    android:layout_marginBottom="4dp"
+    android:background="#FAFAFA">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvHoTen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên Sinh Viên"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tvMaSV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mã SV: 12345678"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/rgDiemDanh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbCoMat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Có"
+            android:buttonTint="#4CAF50"
+            android:textColor="#4CAF50"/>
+
+        <RadioButton
+            android:id="@+id/rbVangMat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Vắng"
+            android:buttonTint="#F44336"
+            android:textColor="#F44336"/>
+    </RadioGroup>
+</LinearLayout>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="40dp"
+        app:cardCornerRadius="75dp"
+        app:cardElevation="10dp">
+
+        <ImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_gallery" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvTenGVHoSo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Đang tải..."
+        android:textColor="#1A202C"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvMaGVHoSo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mã GV: Đang tải..."
+        android:textColor="#718096"
+        android:textSize="16sp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvEmailGVHoSo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email: Đang tải..."
+                android:textSize="16sp"
+                android:padding="8dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EDF2F7" />
+
+            <TextView
+                android:id="@+id/tvHocViGVHoSo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Học vị: Đang tải..."
+                android:textSize="16sp"
+                android:padding="8dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EDF2F7" />
+
+            <TextView
+                android:id="@+id/tvKhoaGVHoSo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Khoa/Bộ môn: Đang tải..."
+                android:textSize="16sp"
+                android:padding="8dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnDangXuat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#E53E3E"
+        android:padding="12dp"
+        android:text="ĐĂNG XUẤT"
+        android:textStyle="bold"
+        app:cardCornerRadius="10dp" />
+
+</LinearLayout>
