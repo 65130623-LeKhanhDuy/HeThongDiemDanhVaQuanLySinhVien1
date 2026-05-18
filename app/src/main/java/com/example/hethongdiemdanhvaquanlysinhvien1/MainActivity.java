@@ -26,12 +26,11 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
 
-        // Bắt sự kiện người dùng bấm chuyển các tab dưới đáy màn hình
         thanhDieuHuong.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment phanManhDuocChon = null;
-                int idNut = item.getItemId(); // Chữ I đã được viết hoa chuẩn xác
+                int idNut = item.getItemId();
 
                 if (idNut == R.id.mnuTrangChu) {
                     phanManhDuocChon = new TrangChuFragment();
