@@ -13,6 +13,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import android.content.Intent;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HoSoFragment extends Fragment {
 
@@ -23,7 +25,6 @@ public class HoSoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ho_so, container, false);
 
-        // Ánh xạ các thành phần giao diện mới của Giảng viên
         tvTenGV = view.findViewById(R.id.tvTenGVHoSo);
         tvMaGV = view.findViewById(R.id.tvMaGVHoSo);
         tvEmailGV = view.findViewById(R.id.tvEmailGVHoSo);
@@ -37,7 +38,6 @@ public class HoSoFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    // Trích xuất các trường thông tin của giảng viên
                     String hoTen = snapshot.child("hoTen").getValue(String.class);
                     String maGV = snapshot.child("maGV").getValue(String.class);
                     String email = snapshot.child("email").getValue(String.class);
@@ -60,6 +60,14 @@ public class HoSoFragment extends Fragment {
 
         view.findViewById(R.id.btnDangXuat).setOnClickListener(v -> {
             Toast.makeText(getContext(), "Đã đăng xuất hệ thống quản trị!", Toast.LENGTH_SHORT).show();
+
+            FirebaseAuth.getInstance().signOut();
+
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+            startActivity(intent);
         });
 
         return view;

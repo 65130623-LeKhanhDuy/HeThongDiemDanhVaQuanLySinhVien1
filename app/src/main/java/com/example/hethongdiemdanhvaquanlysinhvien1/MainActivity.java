@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
         thanhDieuHuong = findViewById(R.id.thanhDieuHuong);
 
-        // Mặc định hiển thị màn hình Trang Chủ khi vừa mở ứng dụng
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.khungChuaFragment, new TrangChuFragment())

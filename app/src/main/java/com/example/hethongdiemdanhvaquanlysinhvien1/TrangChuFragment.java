@@ -32,7 +32,6 @@ public class TrangChuFragment extends Fragment {
         String ngayHienTai = sdf.format(new Date());
 
         refSinhVien = FirebaseDatabase.getInstance().getReference("SinhVien");
-        // Kết nối thẳng tới nhánh của ngày hôm nay trên mạng
         refDiemDanh = FirebaseDatabase.getInstance().getReference("DiemDanh").child(ngayHienTai);
 
         refSinhVien.addValueEventListener(new ValueEventListener() {
