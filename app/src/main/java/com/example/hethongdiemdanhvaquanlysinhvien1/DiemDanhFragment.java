@@ -1,5 +1,6 @@
 package com.example.hethongdiemdanhvaquanlysinhvien1;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +34,7 @@ public class DiemDanhFragment extends Fragment {
     private List<SinhVien> danhSach;
     private Button btnXacNhanDiemDanh;
     private EditText edtTimKiem;
+    private FloatingActionButton fabThemSV;
 
     private DatabaseReference referenceSinhVien;
     private DatabaseReference referenceDiemDanh;
@@ -41,7 +45,8 @@ public class DiemDanhFragment extends Fragment {
 
         rvDanhSachSinhVien = view.findViewById(R.id.rvDanhSachSinhVien);
         btnXacNhanDiemDanh = view.findViewById(R.id.btnXacNhanDiemDanh);
-        edtTimKiem = view.findViewById(R.id.edtTimKiem); // Ánh xạ thanh tìm kiếm
+        edtTimKiem = view.findViewById(R.id.edtTimKiem);
+        fabThemSV = view.findViewById(R.id.fabThemSV);
 
         danhSach = new ArrayList<>();
         adapter = new SinhVienAdapter(danhSach);
@@ -50,7 +55,6 @@ public class DiemDanhFragment extends Fragment {
 
         referenceSinhVien = FirebaseDatabase.getInstance().getReference("SinhVien");
         referenceDiemDanh = FirebaseDatabase.getInstance().getReference("DiemDanh");
-
 
         referenceSinhVien.addValueEventListener(new ValueEventListener() {
             @Override
@@ -75,6 +79,9 @@ public class DiemDanhFragment extends Fragment {
             }
         });
 
+        fabThemSV.setOnClickListener(v -> {
+            hienThiDialogThemSinhVien();
+        });
 
         edtTimKiem.addTextChangedListener(new TextWatcher() {
             @Override
@@ -85,11 +92,9 @@ public class DiemDanhFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                // Mỗi khi gõ 1 chữ, gọi hàm lọc danh sách
                 filter(s.toString());
             }
         });
-
 
         btnXacNhanDiemDanh.setOnClickListener(v -> {
             SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy", Locale.getDefault());
@@ -106,14 +111,49 @@ public class DiemDanhFragment extends Fragment {
         return view;
     }
 
+    private void hienThiDialogThemSinhVien() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Thêm Sinh Viên Mới");
+
+        LinearLayout layout = new LinearLayout(getContext());
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(50, 20, 50, 20);
+
+        final EditText edtMaSVMoi = new EditText(getContext());
+        edtMaSVMoi.setHint("Nhập Mã Sinh Viên (vd: 65130699)");
+        layout.addView(edtMaSVMoi);
+
+        final EditText edtHoTenMoi = new EditText(getContext());
+        edtHoTenMoi.setHint("Nhập Họ và Tên");
+        layout.addView(edtHoTenMoi);
+
+        builder.setView(layout);
+
+        builder.setPositiveButton("LƯU", (dialog, which) -> {
+            String ma = edtMaSVMoi.getText().toString().trim();
+            String ten = edtHoTenMoi.getText().toString().trim();
+
+            if (!ma.isEmpty() && !ten.isEmpty()) {
+                SinhVien svMoi = new SinhVien(ma, ten, false);
+                referenceSinhVien.child(ma).setValue(svMoi).addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "Thêm thành công!", Toast.LENGTH_SHORT).show();
+                });
+            } else {
+                Toast.makeText(getContext(), "Vui lòng nhập đủ thông tin!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("HỦY", (dialog, which) -> dialog.dismiss());
+
+        builder.show();
+    }
 
     private void filter(String text) {
         List<SinhVien> filteredList = new ArrayList<>();
-
         for (SinhVien item : danhSach) {
             if (item.getHoTen().toLowerCase().contains(text.toLowerCase()) ||
                     item.getMaSV().toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(item); // Nếu có thì bốc người đó bỏ vào rổ kết quả
+                filteredList.add(item);
             }
         }
         adapter.filterList(filteredList);
